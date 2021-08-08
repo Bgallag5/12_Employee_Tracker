@@ -12,7 +12,7 @@ INSERT INTO roles (job, salary, dep_id)
 VALUES
 ('Attorney', 10, 1),
 ('Accountant', 70000, 1),
-('Salesmen', 70000, 1),
+('Salesman', 70000, 1),
 ('Intern', 35000, 2);
 
 
