@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "express": "^4.17.1",
+    "inquirer": "^8.1.2",
     "jest": "^27.0.6",
     "mysql2": "^2.3.0"
   },
