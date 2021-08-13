@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS departments;
-DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS departments;
 
 
 CREATE TABLE departments (
@@ -24,6 +24,13 @@ CREATE TABLE employees (
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     manager_id INTEGER, 
-    role_id INTEGER,
-    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE SET NULL
+    role_id INTEGER NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES roles(id)
 );
+
+
+
+
+
+    -- role_id INTEGER,
+    -- FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE SET NULL,
