@@ -1,15 +1,15 @@
 {
-  "name": "12_Employee_Tracker",
+  "name": "12_employee_tracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.html)",
   "main": "server.js",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "express": "^4.17.1",
     "inquirer": "^8.1.2",
     "jest": "^27.0.6",
     "mysql2": "^2.3.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

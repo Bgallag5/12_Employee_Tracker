@@ -2,18 +2,10 @@ const { moduleExpression } = require("@babel/types");
 const { response } = require("express");
 const inquirer = require("inquirer");
 const { runCLI } = require("jest");
-// const db = require('./db/connection');
+const db = require('./db/connection');
 const mysql = require("mysql2");
 
-const db = mysql.createConnection(
-  {
-    host: "localhost",
-    user: "root",
-    password: "bentasmo22",
-    database: "company",
-  },
-  console.log("Connected to company database")
-);
+
 
 db.connect((err) => {
   if (err) console.log(err);
@@ -233,8 +225,10 @@ function updateEmployee() {
           choices: () => {
             let myEmployees = [];
             for (let i = 0; i < data.length; i++) {
-              let name = data[i].first_name;
-              myEmployees.push(name);
+              if (data[i].first_name) {
+                let name = data[i].first_name;
+                myEmployees.push(name);
+              }
             }
             console.log(myEmployees);
             return myEmployees;
@@ -280,6 +274,7 @@ function updateEmployee() {
 function deleteEmployee() {
   db.query(`SELECT * FROM employees`, (err, data) => {
     console.log(data);
+
     inquirer
       .prompt({
         name: "employee",
@@ -296,20 +291,26 @@ function deleteEmployee() {
         },
       })
       .then((response) => {
+        console.log("RESPONSE::::::::");
         console.log(response);
-        let params = response.employee;
-        db.query(
-          `DELETE FROM employees WHERE first_name = ?`,
-          params,
-          (err, data) => {
-            if (err) {
-              console.log(err);
-            }
-            console.table(data);
-            console.log("Employee has been deleted");
-            initialize();
+
+        let id;
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].first_name == response.employee) {
+            id = data[i].id;
+            console.log(id);
           }
-        );
+        }
+
+        // let params = response.employee;
+        db.query(`DELETE FROM employees WHERE id = ?`, id, (err, data) => {
+          if (err) {
+            console.log(err);
+          }
+          console.table(data);
+          console.log("Employee has been deleted");
+          initialize();
+        });
       });
   });
 }
